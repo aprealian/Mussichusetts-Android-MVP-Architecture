@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="colors">
+        <item>#FFFFFF</item>
+        <item>#FFFFFF</item>
+        <item>#FFFFFF</item>
+        <item>#FFFFFF</item>
+        <item>#FFFFFF</item>
+    </string-array>
+
+    <string-array name="tab_titles">
+        <item>Find</item>
+        <item>Wishlist</item>
+        <item>Calendar</item>
+        <item>Create</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="tab_titles_second">
+        <item>Home</item>
+        <item>Favourite</item>
+    </string-array>
+
+    <string-array name="strip_titles">
+        <item>Peribahasa</item>
+        <item>Favourrite</item>
+        <item>About</item>
+    </string-array>
+
+</resources>

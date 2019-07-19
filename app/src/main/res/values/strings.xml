@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Mussichusetts</string>
+    <string name="welcome_to_mussichusetts">Welcome to <b>Mussichusetts</b></string>
+    <string name="please_login">Please login and click social media buttton below</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="login_with_google">Login with Google</string>
+
+
+    <string name="track_error_message">Sorry, something wrong</string>
+
+
+    <string name="search_placeholder">Search tracks by artist..</string>
+
+    <string name="find">Find</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="calendar">Calendar</string>
+    <string name="create">Create</string>
+    <string name="create_event">Create Event</string>
+    <string name="logout">Log Out</string>
+    <string name="account">Account</string>
+
+
+
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="gender">Gender</string>
+    <string name="name_example">Aprilian Nur</string>
+    <string name="email_axample">aprilian@gmail.com</string>
+    <string name="gender_example">Male</string>
+
+
+    <string name="event_date">Event Date</string>
+    <string name="event_choose_date">Choose event date</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_type_name">Type your Event name</string>
+
+
+    <string name="blank_singer">John Mayer</string>
+    <string name="blank_song">Slow Dancing in A Burning Room</string>
+    <string name="blank_album">The Album of John Mayer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

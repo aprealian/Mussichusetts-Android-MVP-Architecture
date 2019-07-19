@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".view.activity.LoginActivity">
+
+    <LinearLayout
+        android:layout_marginTop="100dp"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/welcome_to_mussichusetts"
+            android:textSize="24sp"
+            android:textColor="@color/font1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/please_login"
+            android:textSize="16sp"
+            android:textColor="@color/font2"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvLoginFacebook"
+            android:text="@string/login_with_facebook"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_login_facebook"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvLoginGoogle"
+            android:text="@string/login_with_google"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_login_google"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

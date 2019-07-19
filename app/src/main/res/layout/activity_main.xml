@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".view.activity.MainActivity">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_above="@+id/viewLine"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_above="@+id/navTabBar"
+        android:background="@color/grey1"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"/>
+
+    <devlight.io.library.ntb.NavigationTabBar
+        android:layout_alignParentBottom="true"
+        android:id="@+id/navTabBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:ntb_animation_duration="400"
+        app:ntb_preview_colors="@array/colors"
+        app:ntb_corners_radius="0dp"
+        app:ntb_active_color="@color/colorPrimary"
+        app:ntb_inactive_color="@color/grey1"
+        app:ntb_badged="true"
+        app:ntb_titled="true"
+        app:ntb_scaled="true"
+        app:ntb_tinted="true"
+        app:ntb_title_mode="all"
+        app:ntb_badge_position="right"
+        app:ntb_badge_gravity="top"
+        app:ntb_badge_bg_color="@color/colorPrimary"
+        app:ntb_badge_title_color="@color/colorPrimary"
+        app:ntb_badge_use_typeface="true"
+        app:ntb_swiped="true"
+        app:ntb_bg_color="@color/white"
+        app:ntb_icon_size_fraction="0.5"
+        app:ntb_badge_size="10sp"
+        app:ntb_title_size="10sp"/>
+
+</RelativeLayout>

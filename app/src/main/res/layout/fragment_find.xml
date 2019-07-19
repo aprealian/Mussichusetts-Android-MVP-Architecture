@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mNestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context=".view.fragment.FindFragment">
+    <LinearLayout
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/find"
+            android:textSize="34sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <include layout="@layout/view_search"/>
+
+        <View
+            android:layout_marginTop="@dimen/padding"
+            android:background="@color/greyline"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"/>
+
+        <!--<include layout="@layout/list_item_song"/>-->
+        <!--<include layout="@layout/list_item_song"/>-->
+        <!--<include layout="@layout/list_item_song"/>-->
+
+        <com.teknokrait.mussichusettsapp.view.custom.VerticalRecyclerView
+            android:id="@+id/recyclerView"
+            android:name="com.teknokrait.mussichusettsapp.view.custom.VerticalRecyclerView"
+            android:nestedScrollingEnabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

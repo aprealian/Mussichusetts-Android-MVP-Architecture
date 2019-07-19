@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context=".view.fragment.CreateFragment">
+
+    <TextView
+        android:text="@string/create_event"
+        android:textSize="34sp"
+        android:textColor="#222222"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginTop="@dimen/padding"
+        android:background="@color/greyline"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"/>
+
+    <TextView
+            android:text="@string/event_choose_date"
+            android:textSize="14sp"
+            android:textColor="@color/font2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <EditText
+            android:id="@+id/etEventDate"
+            android:hint="@string/event_choose_date"
+            android:textSize="16sp"
+            android:inputType="datetime"
+            android:textColorHint="@color/font3"
+            android:textColor="@color/font2"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:textColorHighlight="@android:color/transparent"
+            android:paddingTop="@dimen/padding"
+            android:paddingBottom="@dimen/padding"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:background="@drawable/bg_search"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <TextView
+            android:text="@string/event_choose_date"
+            android:textSize="14sp"
+            android:textColor="@color/font2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <EditText
+            android:id="@+id/etEventName"
+            android:hint="@string/event_name"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:textColorHint="@color/font3"
+            android:textColor="@color/font2"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:textColorHighlight="@android:color/transparent"
+            android:paddingTop="@dimen/padding"
+            android:paddingBottom="@dimen/padding"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:background="@drawable/bg_search"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:layout_gravity="end"
+        android:text="@string/create"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_button"
+        android:layout_marginTop="@dimen/padding_triple"
+        android:paddingTop="@dimen/padding"
+        android:paddingBottom="@dimen/padding"
+        android:paddingLeft="@dimen/padding_quart"
+        android:paddingStart="@dimen/padding_quart"
+        android:paddingRight="@dimen/padding_quart"
+        android:paddingEnd="@dimen/padding_quart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

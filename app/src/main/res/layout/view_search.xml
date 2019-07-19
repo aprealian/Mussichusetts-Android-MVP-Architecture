@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/item_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/padding"
+    app:cardUseCompatPadding="false"
+    app:cardElevation="1dp"
+    android:background="@drawable/bg_search"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="@dimen/padding"
+            android:background="@drawable/ic_heart"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            />
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:hint="@string/search_placeholder"
+            android:inputType="text"
+            android:textColorHint="@color/font3"
+            android:textColor="@color/font2"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:textColorHighlight="@android:color/transparent"
+            android:background="@drawable/bg_search"
+            android:paddingLeft="@dimen/padding"
+            android:paddingStart="@dimen/padding"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>
