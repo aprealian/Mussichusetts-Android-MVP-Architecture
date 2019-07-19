@@ -15,8 +15,13 @@ class App : Application(){
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
-        val config = RealmConfiguration.Builder().build()
-        Realm.setDefaultConfiguration(config)
+
+        val realmConfiguration = RealmConfiguration.Builder()
+            .name("mussichusettsapp.db")
+            .schemaVersion(1)
+            .build()
+        Realm.setDefaultConfiguration(realmConfiguration)
+
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())

@@ -7,15 +7,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.teknokrait.mussichusettsapp.R
+import com.teknokrait.mussichusettsapp.local.MyPreference
+import com.teknokrait.mussichusettsapp.view.activity.MainActivity
+import com.teknokrait.mussichusettsapp.view.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_logout.*
 
-class LogoutFragment : Fragment() {
+class LogoutFragment : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_logout, container, false)
+    override fun getFragmentLayout(): Int {
+        return R.layout.fragment_logout
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initOnClick()
+    }
+
+    private fun initOnClick() {
+        tvLogOut.setOnClickListener {
+            context?.let { it1 -> MyPreference.getInstance(it1).logoutSession(activity as MainActivity) }
+        }
+    }
 
 
 }

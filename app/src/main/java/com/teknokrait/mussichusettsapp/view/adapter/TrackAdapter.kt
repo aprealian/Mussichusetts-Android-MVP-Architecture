@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.teknokrait.mussichusettsapp.R
+import com.teknokrait.mussichusettsapp.local.RealmManager
 import com.teknokrait.mussichusettsapp.model.Track
 
 /**
@@ -50,10 +51,29 @@ class TrackAdapter(tracks: List<Track>?) : RecyclerView.Adapter<TrackAdapter.Tra
         private var trackImage = itemView.findViewById<ImageView>(R.id.track_image)!!
         private var trackName = itemView.findViewById<TextView>(R.id.track_name)!!
         private var artistName = itemView.findViewById<TextView>(R.id.artist_name)!!
+        private var ivLike = itemView.findViewById<ImageView>(R.id.ivLike)!!
 
         fun trackListItem(track: Track) {
-            trackName.text = track.name
+            trackName.text = track.trackName
             artistName.text = track.artistName
+
+            checkIsOnWishlist(track, false)
+
+            ivLike.setOnClickListener {
+                checkIsOnWishlist(track, true)
+            }
+        }
+
+        fun checkIsOnWishlist(track: Track, isOnClick:Boolean) {
+            RealmManager.open()
+            if (isOnClick)RealmManager.createTrackDao()?.save(track)
+            if (RealmManager.createTrackDao()?.loadBy(track.trackId) != null){
+                ivLike.setImageResource(R.drawable.ic_heart_filled)
+            } else {
+                ivLike.setImageResource(R.drawable.ic_heart)
+            }
+            RealmManager.close()
         }
     }
+
 }

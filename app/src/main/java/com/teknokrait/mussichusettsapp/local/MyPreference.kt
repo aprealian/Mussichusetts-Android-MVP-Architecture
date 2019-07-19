@@ -23,16 +23,18 @@ class MyPreference private constructor(context: Context) {
         gson = Gson()
     }
 
-    fun addUserSession(tag: String, user: User) {
-        sharedPreferences.edit().putString(tag, gson.toJson(user)).apply()
+    fun addUserSession(user: User) {
+        sharedPreferences.edit().putString(TAG_USER, gson.toJson(user)).apply()
     }
 
-    fun getUserSession(tag: String): User? {
-        val user: User = gson.fromJson<User>(sharedPreferences.getString(tag, ""),
+    fun getUserSession(): User? {
+        if (sharedPreferences.getString(TAG_USER, null) != null){
+            val user: User = gson.fromJson<User>(sharedPreferences.getString(TAG_USER, ""),
                 object : TypeToken<User>() {
-
                 }.type)
-        return user
+            return user
+        }
+        return null
     }
 
     fun clearData() {
@@ -52,9 +54,14 @@ class MyPreference private constructor(context: Context) {
     }
 
     fun checkSession(activity: Activity){
-        if (getUserSession(TAG_USER) == null){
+        if (getUserSession() == null){
             activity.startActivity(Intent(activity, SplashScreenActivity::class.java))
         }
+    }
+
+    fun logoutSession(activity: Activity){
+        sharedPreferences.edit().putString(TAG_USER,null).apply()
+        activity.startActivity(Intent(activity, SplashScreenActivity::class.java))
     }
 
 }

@@ -10,10 +10,13 @@ import com.google.gson.annotations.SerializedName
 data class User(
         @SerializedName("name")
         @Expose
-        val trackId: String,
+        val name: String,
         @SerializedName("email")
         @Expose
-        val trackName: String,
+        val email: String,
         @SerializedName("gender")
         @Expose
-        val albumId: String)
+        val gender: String,
+        @SerializedName("type")
+        @Expose
+        val type: String)

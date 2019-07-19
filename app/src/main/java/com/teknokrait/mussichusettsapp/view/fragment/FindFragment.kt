@@ -1,6 +1,5 @@
 package com.teknokrait.mussichusettsapp.view.fragment
 
-
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -19,8 +18,7 @@ import com.teknokrait.mussichusettsapp.view.adapter.TrackAdapter
 import com.teknokrait.mussichusettsapp.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_find.*
 import androidx.core.widget.NestedScrollView
-
-
+import com.teknokrait.mussichusettsapp.local.RealmManager
 
 class FindFragment : BaseFragment(), TracksPresenter.View {
 
@@ -38,6 +36,7 @@ class FindFragment : BaseFragment(), TracksPresenter.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        RealmManager.open();
         initOnClick()
         initNewsRequest()
         initAdapter()
@@ -91,7 +90,6 @@ class FindFragment : BaseFragment(), TracksPresenter.View {
 
     override fun onSuccessGetTracks(trackList: List<Track>) {
 
-
         Toast.makeText(context,trackList.size.toString(), Toast.LENGTH_LONG).show()
 //        llError!!.setVisibility(View.GONE)
 
@@ -134,5 +132,9 @@ class FindFragment : BaseFragment(), TracksPresenter.View {
         tracksPresenter?.unsubscribe()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        RealmManager.close()
+    }
 
 }

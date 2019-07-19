@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.teknokrait.mussichusettsapp.R
+import com.teknokrait.mussichusettsapp.local.MyPreference
 import com.teknokrait.mussichusettsapp.view.adapter.CustomPagerAdapter
 import devlight.io.library.ntb.NavigationTabBar
 import kotlinx.android.synthetic.main.fragment_find.*
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        MyPreference.getInstance(applicationContext).checkSession(this)
         initTab()
     }
 

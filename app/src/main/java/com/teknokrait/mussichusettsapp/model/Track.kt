@@ -2,6 +2,7 @@ package com.teknokrait.mussichusettsapp.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import java.io.Serializable
 
@@ -9,27 +10,30 @@ import java.io.Serializable
  * Created by Aprilian Nur Wakhid Daini on 7/18/2019.
  */
 
-data class Track(
+open class Track(
+        @PrimaryKey
         @SerializedName("track_id")
         @Expose
-        val id: String,
+        var trackId: Long,
 
         @SerializedName("track_name")
         @Expose
-        val name: String?,
+        var trackName: String?,
 
         @SerializedName("album_id")
         @Expose
-        val albumId: String,
+        var albumId: Long,
 
         @SerializedName("album_name")
         @Expose
-        val albumName: String?,
+        var albumName: String?,
 
         @SerializedName("artist_id")
         @Expose
-        val artistId: String,
+        var artistId: Long,
 
         @SerializedName("artist_name")
         @Expose
-        val artistName: String?)
+        var artistName: String?) : RealmObject(){
+                constructor() : this(0,"",0,"",0,"")
+        }
