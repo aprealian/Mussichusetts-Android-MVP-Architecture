@@ -57,21 +57,32 @@ class TrackAdapter(tracks: List<Track>?) : RecyclerView.Adapter<TrackAdapter.Tra
             trackName.text = track.trackName
             artistName.text = track.artistName
 
-            checkIsOnWishlist(track, false)
+            checkState(track)
 
             ivLike.setOnClickListener {
-                checkIsOnWishlist(track, true)
+                onClickWishlist(track)
             }
         }
 
-        fun checkIsOnWishlist(track: Track, isOnClick:Boolean) {
+        fun onClickWishlist(track: Track) {
             RealmManager.open()
-            if (isOnClick)RealmManager.createTrackDao()?.save(track)
             if (RealmManager.createTrackDao()?.loadBy(track.trackId) != null){
-                ivLike.setImageResource(R.drawable.ic_heart_filled)
-            } else {
+                //track.deleteFromRealm()
+                RealmManager.createTrackDao()?.remove(track.trackId)
                 ivLike.setImageResource(R.drawable.ic_heart)
+            } else {
+                RealmManager.createTrackDao()?.save(track)
+                ivLike.setImageResource(R.drawable.ic_heart_filled)
             }
+            RealmManager.close()
+        }
+
+        fun checkState(track: Track){
+            RealmManager.open()
+            if (RealmManager.createTrackDao()?.loadBy(track.trackId) != null)
+                ivLike.setImageResource(R.drawable.ic_heart_filled)
+            else
+                ivLike.setImageResource(R.drawable.ic_heart)
             RealmManager.close()
         }
     }

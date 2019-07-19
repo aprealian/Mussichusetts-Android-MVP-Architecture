@@ -5,6 +5,10 @@ import com.teknokrait.mussichusettsapp.model.Track
 import io.realm.Realm
 import io.realm.RealmObject
 import io.realm.RealmResults
+import io.realm.RealmObject.deleteFromRealm
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import timber.log.Timber
+
 
 /**
  * Created by Aprilian Nur Wakhid Daini on 7/19/2019.
@@ -39,18 +43,20 @@ class TrackDao(@param:NonNull private val mRealm: Realm) {
         return mRealm.where(Track::class.java).equalTo("trackId",id).findFirst()
     }
 
-//    private fun isOnWishList(track: Track): Boolean{
-//        RealmManager.open()
-//        val trackResult = RealmManager.createTrackDao()?.loadBy(track.trackId)
-//        return trackResult != null
-//    }
+    fun remove(trackId: Long) {
+        // check result
+        val results = mRealm.where(Track::class.java)
+            .equalTo("trackId", trackId)
+            .findAll()
 
-    fun remove(@NonNull `object`: RealmObject) {
-        mRealm.executeTransaction(object : Realm.Transaction {
-            override fun execute(realm: Realm) {
-                `object`.deleteFromRealm()
-            }
-        })
+        // if result valid, then remove or delete from Realm,
+        // to avoid unmanaged Realm object
+        if (results.isValid()) {
+            mRealm.executeTransaction(Realm.Transaction {
+                results.deleteAllFromRealm()
+                Timber.d(this.javaClass.name, "execute: items deleted")
+            })
+        }
     }
 
     fun removeAll() {
