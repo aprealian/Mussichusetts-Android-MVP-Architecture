@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin"
-    tools:context=".view.fragment.WishlistFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:padding="@dimen/activity_horizontal_margin"
+              tools:context=".view.fragment.WishlistFragment">
 
     <TextView
         android:text="@string/wishlist"
@@ -21,5 +21,7 @@
         android:background="@color/greyline"
         android:layout_width="match_parent"
         android:layout_height="0.2dp"/>
+
+    <include layout="@layout/view_list"/>
 
 </LinearLayout>

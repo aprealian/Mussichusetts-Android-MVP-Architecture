@@ -2,33 +2,25 @@ package com.teknokrait.mussichusettsapp.view.fragment
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
 import com.teknokrait.mussichusettsapp.R
 import com.teknokrait.mussichusettsapp.model.Track
-import com.teknokrait.mussichusettsapp.model.TrackItem
 import com.teknokrait.mussichusettsapp.presenter.TracksPresenter
-import com.teknokrait.mussichusettsapp.view.adapter.TrackAdapter
 import com.teknokrait.mussichusettsapp.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_find.*
 import androidx.core.widget.NestedScrollView
 import com.teknokrait.mussichusettsapp.local.RealmManager
+import com.teknokrait.mussichusettsapp.view.adapter.TrackNewAdapter
 
 class FindFragment : BaseFragment(), TracksPresenter.View {
 
-    private var keyword: String = ""
+    private var keyword: String = "jsjsjajaj"
     private var page = 1
     private var isMore = true
     private var isLoading = false
 
     private var tracksPresenter: TracksPresenter? = null
-    private var newsAdapter: TrackAdapter? = null
+    private var newsAdapter: TrackNewAdapter? = null
 
     override fun getFragmentLayout(): Int {
         return R.layout.fragment_find
@@ -37,7 +29,6 @@ class FindFragment : BaseFragment(), TracksPresenter.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         RealmManager.open();
-        initOnClick()
         initNewsRequest()
         initAdapter()
     }
@@ -62,49 +53,32 @@ class FindFragment : BaseFragment(), TracksPresenter.View {
     }
 
     private fun initNewsRequest() {
-//        tvNotFound!!.setVisibility(View.GONE)
-//        llError!!.setVisibility(View.GONE)
-
-        newsAdapter = TrackAdapter( null)
+        newsAdapter = TrackNewAdapter( null)
         recyclerView!!.setAdapter(newsAdapter)
 
         tracksPresenter = TracksPresenter(this)
-//        newsAdapter!!.addLoadingView()
+        newsAdapter!!.loadingOn()
         tracksPresenter!!.getTracks(keyword, page)
     }
 
     private fun loadMoreData() {
-
-        Toast.makeText(context, "load more..", Toast.LENGTH_LONG).show()
-
         if (isMore && !isLoading) {
-//            newsAdapter!!.addLoadingView()
+            newsAdapter!!.loadingOn()
             isLoading = true
             Handler().postDelayed({ tracksPresenter!!.getTracks(keyword, page) }, 5000)
         }
     }
 
-    private fun initOnClick() {
-//        tvRetry!!.setOnClickListener(View.OnClickListener { initNewsRequest() })
-    }
-
     override fun onSuccessGetTracks(trackList: List<Track>) {
-
-        Toast.makeText(context,trackList.size.toString(), Toast.LENGTH_LONG).show()
-//        llError!!.setVisibility(View.GONE)
-
-//        LocalDataStorage.getInstance(context).saveArticles(articleList)
-//        newsAdapter!!.removeLoadingView()
-        newsAdapter!!.addTracks(trackList)
+        newsAdapter!!.loadingOff()
+        newsAdapter!!.addTrackList(trackList)
         newsAdapter!!.notifyDataSetChanged()
-//        scrollListener!!.setLoaded()
 
         page++
         isLoading = false
 
         if (newsAdapter!!.getItemCount() <= 0) {
-//            tvNotFound!!.setVisibility(View.VISIBLE)
-//            tvNotFound!!.text = String.format(getString(R.string.news_with_keyword_not_found), keyword)
+            newsAdapter!!.addEmptyState()
         }
 
         if (trackList.size == 0) {
@@ -113,18 +87,7 @@ class FindFragment : BaseFragment(), TracksPresenter.View {
     }
 
     override fun onErrorGetTracks(throwable: Throwable) {
-        //newsAdapter!!.removeLoadingView()
-        if (newsAdapter!!.getItemCount() > 0) {
-            //tvNotFound!!.setVisibility(View.GONE)
-        } else {
-            //llError!!.setVisibility(View.VISIBLE)
-        }
-    }
-
-    internal fun isEmptyNews() {
-        if (newsAdapter!!.getItemCount() <= 0) {
-            //tvNotFound!!.setVisibility(View.VISIBLE)
-        }
+        newsAdapter?.checkErrorState(throwable)
     }
 
     override fun onDetach() {

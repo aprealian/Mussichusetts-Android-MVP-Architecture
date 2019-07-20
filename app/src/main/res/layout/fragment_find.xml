@@ -7,10 +7,8 @@
     android:background="@color/white"
     android:padding="@dimen/activity_horizontal_margin"
     tools:context=".view.fragment.FindFragment">
+
     <LinearLayout
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:descendantFocusability="blocksDescendants"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

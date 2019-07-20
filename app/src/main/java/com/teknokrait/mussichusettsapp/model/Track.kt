@@ -3,6 +3,7 @@ package com.teknokrait.mussichusettsapp.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
+import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
 import java.io.Serializable
 
@@ -34,6 +35,9 @@ open class Track(
 
         @SerializedName("artist_name")
         @Expose
-        var artistName: String?) : RealmObject(){
-                constructor() : this(0,"",0,"",0,"")
+        var artistName: String?,
+
+        @Ignore
+        var itemType: Int) : RealmObject(){
+                constructor() : this(0,"",0,"",0,"", 0)
         }

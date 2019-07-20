@@ -7,6 +7,7 @@
 
 
     <string name="track_error_message">Sorry, something wrong</string>
+    <string name="track_not_found">Track not found</string>
 
 
     <string name="search_placeholder">Search tracks by artist..</string>
