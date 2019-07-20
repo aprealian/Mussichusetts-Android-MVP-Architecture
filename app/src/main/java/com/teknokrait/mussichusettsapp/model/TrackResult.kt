@@ -44,3 +44,12 @@ data class TrackItem(
         @SerializedName("track")
         @Expose
         val track: Track)
+
+data class MessageEvent(
+        @SerializedName("tag")
+        @Expose
+        val tag: String,
+        @SerializedName("object")
+        @Expose
+        val objects: Any
+)

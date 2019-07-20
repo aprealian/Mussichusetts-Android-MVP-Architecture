@@ -49,21 +49,21 @@ class TrackDao(@param:NonNull private val mRealm: Realm) {
 
         return mRealm.where(Track::class.java)
             .findAllAsync()
-            .sort(Track.COL_TRACK_ID)
+            .sort(Track::trackId.name)
     }
 
     fun loadAllAsync(): RealmResults<Track> {
-        return mRealm.where(Track::class.java).findAllAsync().sort(Track.COL_TRACK_ID)
+        return mRealm.where(Track::class.java).findAllAsync().sort(Track::trackId.name)
     }
 
     fun loadBy(id: Long): Track? {
-        return mRealm.where(Track::class.java).equalTo(Track.COL_TRACK_ID,id).findFirst()
+        return mRealm.where(Track::class.java).equalTo(Track::trackId.name,id).findFirst()
     }
 
     fun remove(trackId: Long) {
         // check result
         val results = mRealm.where(Track::class.java)
-            .equalTo(Track.COL_TRACK_ID, trackId)
+            .equalTo(Track::trackId.name, trackId)
             .findAll()
 
         // if result valid, then remove or delete from Realm,

@@ -47,8 +47,5 @@ open class Track(
                         const val ALBUM_NAME = "album_name"
                         const val ARTIST_ID = "artist_id"
                         const val ARTIST_NAME = "artist_name"
-
-                        const val COL_TRACK_ID = "trackId"
-                        const val COL_TRACK_NAME = "trackName"
                 }
         }

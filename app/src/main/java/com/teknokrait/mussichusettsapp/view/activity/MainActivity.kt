@@ -12,10 +12,11 @@ import androidx.viewpager.widget.ViewPager
 import com.teknokrait.mussichusettsapp.R
 import com.teknokrait.mussichusettsapp.local.MyPreference
 import com.teknokrait.mussichusettsapp.view.adapter.CustomPagerAdapter
+import com.teknokrait.mussichusettsapp.view.base.BaseActivity
 import devlight.io.library.ntb.NavigationTabBar
 import kotlinx.android.synthetic.main.fragment_find.*
 
-class MainActivity : AppCompatActivity(), LifecycleOwner {
+class MainActivity : BaseActivity(), LifecycleOwner {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

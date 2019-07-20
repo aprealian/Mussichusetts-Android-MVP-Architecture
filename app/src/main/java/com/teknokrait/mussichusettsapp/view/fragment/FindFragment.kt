@@ -5,17 +5,24 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import com.teknokrait.mussichusettsapp.R
 import com.teknokrait.mussichusettsapp.model.Track
 import com.teknokrait.mussichusettsapp.presenter.TracksPresenter
 import com.teknokrait.mussichusettsapp.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_find.*
 import androidx.core.widget.NestedScrollView
+import com.teknokrait.mussichusettsapp.listener.RxBus
 import com.teknokrait.mussichusettsapp.view.adapter.TrackNewAdapter
 import com.teknokrait.mussichusettsapp.local.RealmManager
 import kotlinx.android.synthetic.main.view_search.*
+import com.teknokrait.mussichusettsapp.model.MessageEvent
+import com.teknokrait.mussichusettsapp.util.Constants
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.ThreadMode
+import org.greenrobot.eventbus.Subscribe
 
-class FindFragment : BaseFragment(), TracksPresenter.View {
+class FindFragment : BaseFragment(), TracksPresenter.View, TrackNewAdapter.OnWishlist {
 
     private var keyword: String = ""
     private var page = 1
@@ -29,12 +36,17 @@ class FindFragment : BaseFragment(), TracksPresenter.View {
         return R.layout.fragment_find
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isEventBusNeeded = true
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         RealmManager.open()
         initTrackRequest(keyword)
         initAdapter()
-        initTypingKeyword();
+        initTypingKeyword()
     }
 
     private fun initTypingKeyword() {
@@ -74,7 +86,7 @@ class FindFragment : BaseFragment(), TracksPresenter.View {
         page = 1
         isLoading = false
         isMore = true
-        newsAdapter = TrackNewAdapter( null)
+        newsAdapter = TrackNewAdapter(this,  null)
         recyclerView!!.adapter = newsAdapter
 
         tracksPresenter = TracksPresenter(this)
@@ -109,6 +121,17 @@ class FindFragment : BaseFragment(), TracksPresenter.View {
 
     override fun onErrorGetTracks(throwable: Throwable) {
         newsAdapter?.checkErrorState(throwable)
+    }
+
+    override fun onClickWishlist(track: Track) {
+        //Toast.makeText(context, "wishlist listener", Toast.LENGTH_LONG).show()
+        //RxBus.publish(100, track)
+        EventBus.getDefault().post(MessageEvent(Constants.TAG_WISH_LIST, track))
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: MessageEvent) {
+        if(event.tag.equals(Constants.TAG_WISH_LIST))newsAdapter?.notifyDataSetChanged()
     }
 
     override fun onDetach() {

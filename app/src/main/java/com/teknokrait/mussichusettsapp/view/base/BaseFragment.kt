@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
+import com.teknokrait.mussichusettsapp.listener.RxBus
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by Aprilian Nur Wakhid Daini on 7/19/2019.
  */
 
 abstract class BaseFragment : Fragment() {
+
+    protected var isEventBusNeeded:Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(getFragmentLayout(), container, false)
@@ -32,4 +36,18 @@ abstract class BaseFragment : Fragment() {
      */
     protected abstract fun getFragmentLayout(): Int
 
+    override fun onDestroy() {
+        super.onDestroy()
+        RxBus.unregister(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(isEventBusNeeded)EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if(isEventBusNeeded)EventBus.getDefault().unregister(this)
+    }
 }

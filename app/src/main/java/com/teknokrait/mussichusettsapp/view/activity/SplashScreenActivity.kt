@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Handler
 import com.teknokrait.mussichusettsapp.R
 
-
 class SplashScreenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

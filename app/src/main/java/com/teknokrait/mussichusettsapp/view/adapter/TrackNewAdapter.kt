@@ -18,6 +18,7 @@ import java.util.ArrayList
 class TrackNewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private var trackList: MutableList<Track>? = null
+    var listener:OnWishlist? = null
 
     override fun getItemCount(): Int {
         if(trackList == null) trackList = ArrayList()
@@ -26,6 +27,11 @@ class TrackNewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     internal constructor(articleList: List<Track>?) {
         setTrackList(articleList)
+    }
+
+    internal constructor(listener: OnWishlist, articleList: List<Track>?) {
+        setTrackList(articleList)
+        this.listener = listener
     }
 
     internal constructor(mRecyclerView: RecyclerView, trackList: MutableList<Track>) {
@@ -63,7 +69,7 @@ class TrackNewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     override fun onBindViewHolder(@NonNull holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == VIEW_TYPE_ARTICLE) {
-            (holder as TrackViewHolder).bind(trackList!![position])
+            (holder as TrackViewHolder).bind(listener, trackList!![position])
         } else if (getItemViewType(position) == VIEW_TYPE_EMPTY) {
             (holder as ListEmptyViewHolder).bind(trackList!![position])
         }
@@ -88,7 +94,7 @@ class TrackNewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private var artistName = itemView.findViewById<TextView>(R.id.artist_name)!!
         private var ivLike = itemView.findViewById<ImageView>(R.id.ivLike)!!
 
-        fun bind(track: Track) {
+        fun bind(listener: OnWishlist?, track: Track) {
             trackName.text = track.trackName
             artistName.text = track.artistName
 
@@ -96,6 +102,8 @@ class TrackNewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             ivLike.setOnClickListener {
                 onClickWishlist(track)
+                listener?.onClickWishlist(track)
+                //RxBus.publish(100, track)
             }
         }
 
@@ -174,6 +182,10 @@ class TrackNewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             (this.trackList as ArrayList<Track>).add(0, Track(-1,"Sorry, something wrong..",-1,"",-1,"",2))
             notifyDataSetChanged()
         }
+    }
+
+    interface OnWishlist{
+        fun onClickWishlist(track: Track)
     }
 
     companion object {

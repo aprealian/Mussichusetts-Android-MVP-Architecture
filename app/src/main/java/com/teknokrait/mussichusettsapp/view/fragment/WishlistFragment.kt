@@ -1,19 +1,26 @@
 package com.teknokrait.mussichusettsapp.view.fragment
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
-import androidx.core.widget.NestedScrollView
+
 
 import com.teknokrait.mussichusettsapp.R
 import com.teknokrait.mussichusettsapp.local.RealmManager
+import com.teknokrait.mussichusettsapp.model.MessageEvent
 import com.teknokrait.mussichusettsapp.model.Track
 import com.teknokrait.mussichusettsapp.presenter.TracksPresenter
+import com.teknokrait.mussichusettsapp.util.Constants
 import com.teknokrait.mussichusettsapp.view.adapter.TrackNewAdapter
 import com.teknokrait.mussichusettsapp.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_wishlist.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
-class WishlistFragment : BaseFragment(), TracksPresenter.View  {
+
+
+
+class WishlistFragment : BaseFragment(), TracksPresenter.View, TrackNewAdapter.OnWishlist {
 
     private var page = 0
     private var isMore = true
@@ -26,50 +33,42 @@ class WishlistFragment : BaseFragment(), TracksPresenter.View  {
         return R.layout.fragment_wishlist
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isEventBusNeeded = true
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         RealmManager.open()
         initTrackRequest()
-        //initAdapter()
+        wishlistListener()
     }
 
-//    private fun initAdapter() {
-//        mNestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
-//            if (v.getChildAt(v.childCount - 1) != null) {
-//
-//                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
-//
-//                    val visibleItemCount = recyclerView.linearLayoutManager!!.childCount
-//                    val totalItemCount = recyclerView.linearLayoutManager!!.itemCount
-//                    val pastVisiblesItems = recyclerView.linearLayoutManager!!.findFirstVisibleItemPosition()
-//
-//                    if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
-//                        //after reach latest data then load more data (load next page)
-//                        loadMoreData()
-//                    }
-//                }
+    private fun wishlistListener() {
+//        RxBusOld.subscribe(Consumer {
+//            if (it is MessageEvent) {
+//                //Toast.makeText(context, "new wishlist", Toast.LENGTH_LONG).show()
+//                initTrackRequest()
 //            }
 //        })
-//    }
+
+//        RxBus.subscribe(subject = 100, lifecycle = Track , action = Consumer {
+//            //Toast.makeText(context, "new wishlist", Toast.LENGTH_LONG).show()
+//            initTrackRequest()
+//        })
+    }
 
     private fun initTrackRequest() {
         page = 1
         isLoading = false
         isMore = true
-        newsAdapter = TrackNewAdapter( null)
+        newsAdapter = TrackNewAdapter( this, null)
         recyclerView!!.adapter = newsAdapter
         tracksPresenter = TracksPresenter(this)
         newsAdapter!!.loadingOn()
         tracksPresenter!!.getTracksFromDB(page)
     }
-
-//    private fun loadMoreData() {
-//        if (isMore && !isLoading) {
-//            newsAdapter!!.loadingOn()
-//            isLoading = true
-//            Handler().postDelayed({ tracksPresenter!!.getTracksFromDB(page) }, 5000)
-//        }
-//    }
 
     override fun onSuccessGetTracks(trackList: List<Track>) {
         newsAdapter!!.loadingOff()
@@ -92,6 +91,17 @@ class WishlistFragment : BaseFragment(), TracksPresenter.View  {
         newsAdapter?.checkErrorState(throwable)
     }
 
+    override fun onClickWishlist(track: Track) {
+        //Toast.makeText(context, "wishlist listener", Toast.LENGTH_LONG).show()
+        //RxBus.publish(100, track)
+        EventBus.getDefault().post(MessageEvent(Constants.TAG_WISH_LIST, track))
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: MessageEvent) {
+        if(event.tag.equals(Constants.TAG_WISH_LIST))initTrackRequest()
+    }
+
     override fun onDetach() {
         super.onDetach()
         tracksPresenter?.unsubscribe()
@@ -103,3 +113,4 @@ class WishlistFragment : BaseFragment(), TracksPresenter.View  {
     }
 
 }
+
