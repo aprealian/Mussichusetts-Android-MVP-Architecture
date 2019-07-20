@@ -35,7 +35,7 @@ class CreateFragment : BaseFragment() {
             } else if(etEventName.text.toString().isEmpty()){
                 Toast.makeText(context, "Event Name cannot be empty", Toast.LENGTH_LONG).show()
             } else {
-                RealmManager.createEventDao()?.save(Event(etEventName.text.toString(), Date()))
+                RealmManager.createEventDao()?.save(Event(etEventName.text.toString(), Calendar.getInstance().getTime()))
                 Toast.makeText(context, "Create Event Success", Toast.LENGTH_LONG).show()
             }
         }

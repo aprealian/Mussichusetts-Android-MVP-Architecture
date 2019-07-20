@@ -9,7 +9,4 @@ import kotlinx.android.synthetic.main.view_calendar_month.view.*
  */
 class MonthViewContainer(view: View) : ViewContainer(view) {
     val textView = view.calendarMonthText
-
-    // Without the kotlin android extensions plugin
-    // val textView = view.findViewById<TextView>(R.id.calendarDayText)
 }

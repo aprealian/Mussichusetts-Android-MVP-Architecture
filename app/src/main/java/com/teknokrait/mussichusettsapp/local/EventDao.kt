@@ -5,6 +5,7 @@ import com.teknokrait.mussichusettsapp.model.Event
 import io.realm.Realm
 import io.realm.RealmResults
 import timber.log.Timber
+import java.util.*
 
 /**
  * Created by Aprilian Nur Wakhid Daini on 7/19/2019.
@@ -49,6 +50,31 @@ class EventDao(@param:NonNull private val mRealm: Realm) {
 
     fun loadBy(id: Long): Event? {
         return mRealm.where(Event::class.java).equalTo(Event::eventId.name,id).findFirst()
+    }
+
+    fun loadByDate(date: Date): Event? {
+        return mRealm.where(Event::class.java).equalTo(Event::eventDate.name,date).findFirst()
+    }
+
+    fun countEventByDate(date: Date): Int? {
+
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        val date1 = Date(calendar.timeInMillis)
+        calendar.add(Calendar.DAY_OF_YEAR, 1)
+        val date2 = Date(calendar.timeInMillis)
+
+        return mRealm.where(Event::class.java)
+            .greaterThanOrEqualTo(Event::eventDate.name, date1)
+            .lessThan(Event::eventDate.name, date2)
+            .findAll().size
+
+        //return mRealm.where(Event::class.java).equalTo(Event::eventDate.name,date).findAll().count()
     }
 
     fun remove(eventId: Long) {

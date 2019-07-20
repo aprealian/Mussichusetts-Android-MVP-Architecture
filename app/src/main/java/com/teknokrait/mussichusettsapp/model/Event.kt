@@ -26,7 +26,7 @@ open class Event(
 
     @Ignore
     var itemType: Int) : RealmObject(){
-    constructor() : this(0,"",Date(), 0)
+    constructor() : this(0,"",Calendar.getInstance().getTime(), 0)
     constructor(eventName: String?, eventDate: Date) : this(){
         this.eventName = eventName
         this.eventDate = eventDate

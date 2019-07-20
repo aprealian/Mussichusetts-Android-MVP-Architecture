@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import com.teknokrait.mussichusettsapp.listener.RxBus
+import com.teknokrait.mussichusettsapp.local.RealmManager
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -36,18 +37,21 @@ abstract class BaseFragment : Fragment() {
      */
     protected abstract fun getFragmentLayout(): Int
 
-    override fun onDestroy() {
-        super.onDestroy()
-        RxBus.unregister(this)
-    }
-
     override fun onStart() {
         super.onStart()
+        RealmManager.open()
         if(isEventBusNeeded)EventBus.getDefault().register(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        RealmManager.close()
+        RxBus.unregister(this)
     }
 
     override fun onStop() {
         super.onStop()
         if(isEventBusNeeded)EventBus.getDefault().unregister(this)
     }
+
 }
