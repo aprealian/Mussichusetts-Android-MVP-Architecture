@@ -31,7 +31,7 @@ class TrackDao(@param:NonNull private val mRealm: Realm) {
     }
 
     fun loadAll(): RealmResults<Track> {
-        return mRealm.where(Track::class.java).findAll().sort(Track.TRACK_NAME)
+        return mRealm.where(Track::class.java).findAll().sort(Track::trackName.name)
     }
 
     fun loadByPage(page:Int): MutableList<Track> {

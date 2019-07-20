@@ -1,5 +1,6 @@
 package com.teknokrait.mussichusettsapp.local
 
+import com.teknokrait.mussichusettsapp.model.Event
 import com.teknokrait.mussichusettsapp.model.Track
 import io.realm.Realm
 
@@ -27,11 +28,17 @@ object RealmManager {
         return mRealm?.let { TrackDao(it) }
     }
 
+    fun createEventDao(): EventDao? {
+        checkForOpenRealm()
+        return mRealm?.let { EventDao(it) }
+    }
+
     fun clear() {
         checkForOpenRealm()
         mRealm!!.executeTransaction(object : Realm.Transaction {
             override fun execute(realm: Realm) {
                 realm.delete(Track::class.java)
+                realm.delete(Event::class.java)
                 //clear rest of your dao classes
             }
         })
