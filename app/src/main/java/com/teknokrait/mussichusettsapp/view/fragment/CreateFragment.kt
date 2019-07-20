@@ -9,14 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.teknokrait.mussichusettsapp.R
+import com.teknokrait.mussichusettsapp.view.base.BaseFragment
 
 
-class CreateFragment : Fragment() {
+class CreateFragment : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create, container, false)
+    override fun getFragmentLayout(): Int {
+        return R.layout.fragment_create
     }
+
+
 
 }
