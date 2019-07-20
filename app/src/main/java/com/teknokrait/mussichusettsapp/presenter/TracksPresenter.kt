@@ -1,6 +1,7 @@
 package com.teknokrait.mussichusettsapp.presenter
 
 import com.teknokrait.mussichusettsapp.BuildConfig
+import com.teknokrait.mussichusettsapp.local.RealmManager
 import com.teknokrait.mussichusettsapp.model.RequestResult
 import com.teknokrait.mussichusettsapp.model.Track
 import com.teknokrait.mussichusettsapp.model.TrackItem
@@ -63,6 +64,18 @@ class TracksPresenter(view: TracksPresenter.View) {
 
                 }
             })
+    }
+
+    //load data from Realm
+    fun getTracksFromDB(page: Int) {
+        RealmManager.open()
+        val list =  RealmManager.createTrackDao()?.loadByPage(page)
+
+        if (list != null && list.size > 0){
+            view.onSuccessGetTracks(list)
+        } else {
+            view.onErrorGetTracks(Throwable("Result is empty"))
+        }
     }
 
     fun unsubscribe() {

@@ -153,10 +153,18 @@ class TrackNewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     fun addEmptyState() {
-        //Remove loading item
+        //add empty
         this.trackList = ArrayList()
         (this.trackList as ArrayList<Track>).add(0, Track(-1,null,-1,"",-1,"",2))
         notifyDataSetChanged()
+    }
+
+    fun removeEmptyState() {
+        //Remove loading item
+        if(itemCount > 0 && trackList?.get(0)?.itemType == VIEW_TYPE_EMPTY){
+            trackList?.removeAt(0)
+            notifyDataSetChanged()
+        }
     }
 
     fun checkErrorState(throwable: Throwable) {

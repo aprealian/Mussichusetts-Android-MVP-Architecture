@@ -9,7 +9,6 @@ import io.realm.RealmObject.deleteFromRealm
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import timber.log.Timber
 
-
 /**
  * Created by Aprilian Nur Wakhid Daini on 7/19/2019.
  */
@@ -32,21 +31,39 @@ class TrackDao(@param:NonNull private val mRealm: Realm) {
     }
 
     fun loadAll(): RealmResults<Track> {
-        return mRealm.where(Track::class.java).findAll().sort("trackName")
+        return mRealm.where(Track::class.java).findAll().sort(Track.TRACK_NAME)
+    }
+
+    fun loadByPage(page:Int): MutableList<Track> {
+
+//        val results = mRealm.where(Track::class.java)
+//            .sort("trackId")
+//            .findAll()
+//
+//        val start = page*10
+//        var end = (page+1)*10
+//        if (end > results.size){
+//            end = results.size
+//        }
+//        return results.subList(start,end)
+
+        return mRealm.where(Track::class.java)
+            .findAllAsync()
+            .sort(Track.COL_TRACK_ID)
     }
 
     fun loadAllAsync(): RealmResults<Track> {
-        return mRealm.where(Track::class.java).findAllAsync().sort("trackName")
+        return mRealm.where(Track::class.java).findAllAsync().sort(Track.COL_TRACK_ID)
     }
 
     fun loadBy(id: Long): Track? {
-        return mRealm.where(Track::class.java).equalTo("trackId",id).findFirst()
+        return mRealm.where(Track::class.java).equalTo(Track.COL_TRACK_ID,id).findFirst()
     }
 
     fun remove(trackId: Long) {
         // check result
         val results = mRealm.where(Track::class.java)
-            .equalTo("trackId", trackId)
+            .equalTo(Track.COL_TRACK_ID, trackId)
             .findAll()
 
         // if result valid, then remove or delete from Realm,

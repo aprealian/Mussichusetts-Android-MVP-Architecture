@@ -13,31 +13,42 @@ import java.io.Serializable
 
 open class Track(
         @PrimaryKey
-        @SerializedName("track_id")
+        @SerializedName(TRACK_ID)
         @Expose
         var trackId: Long,
 
-        @SerializedName("track_name")
+        @SerializedName(TRACK_NAME)
         @Expose
         var trackName: String?,
 
-        @SerializedName("album_id")
+        @SerializedName(ALBUM_ID)
         @Expose
         var albumId: Long,
 
-        @SerializedName("album_name")
+        @SerializedName(ALBUM_NAME)
         @Expose
         var albumName: String?,
 
-        @SerializedName("artist_id")
+        @SerializedName(ARTIST_ID)
         @Expose
         var artistId: Long,
 
-        @SerializedName("artist_name")
+        @SerializedName(ARTIST_NAME)
         @Expose
         var artistName: String?,
 
         @Ignore
         var itemType: Int) : RealmObject(){
                 constructor() : this(0,"",0,"",0,"", 0)
+                companion object {
+                        const val TRACK_ID = "track_id"
+                        const val TRACK_NAME = "track_name"
+                        const val ALBUM_ID = "album_id"
+                        const val ALBUM_NAME = "album_name"
+                        const val ARTIST_ID = "artist_id"
+                        const val ARTIST_NAME = "artist_name"
+
+                        const val COL_TRACK_ID = "trackId"
+                        const val COL_TRACK_NAME = "trackName"
+                }
         }
