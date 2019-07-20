@@ -3,6 +3,7 @@ package com.teknokrait.mussichusettsapp
 import android.app.Activity
 import android.app.Application
 import androidx.fragment.app.Fragment
+import com.jakewharton.threetenabp.AndroidThreeTen
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import timber.log.Timber
@@ -18,10 +19,13 @@ class App : Application(){
 
         val realmConfiguration = RealmConfiguration.Builder()
             .name("mussichusettsapp.db")
-            .schemaVersion(1)
+            .schemaVersion(2)
+            .deleteRealmIfMigrationNeeded()
             .build()
         Realm.setDefaultConfiguration(realmConfiguration)
 
+        //calendar event
+        AndroidThreeTen.init(this)
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
