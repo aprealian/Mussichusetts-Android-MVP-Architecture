@@ -9,4 +9,5 @@ import kotlinx.android.synthetic.main.view_calendar_month.view.*
  */
 class MonthViewContainer(view: View) : ViewContainer(view) {
     val textView = view.calendarMonthText
+    val legendLayout = view.calendarDayText
 }

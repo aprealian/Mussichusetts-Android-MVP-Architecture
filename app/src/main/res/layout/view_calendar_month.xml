@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tools:TextView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/calendarMonthText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="20sp"
-                tools:text="22"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:paddingTop="14dp">
+
+    <TextView
+            android:id="@+id/calendarMonthText"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/font2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            tools:text="June 2019" />
+
+    <include android:id="@+id/calendarDayText" layout="@layout/calendar_day_legend" />
+
+    <View
+            android:layout_marginTop="10dp"
+            android:background="#eeeeee"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+</LinearLayout>
+

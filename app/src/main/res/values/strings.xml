@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Mussichusetts</string>
-    <string name="welcome_to_mussichusetts">Welcome to <b>Mussichusetts</b></string>
+    <string name="welcome_to_mussichusetts">Welcome to
+        <b>Mussichusetts</b>
+    </string>
     <string name="please_login">Please login and click social media buttton below</string>
     <string name="login_with_facebook">Login with Facebook</string>
     <string name="login_with_google">Login with Google</string>
@@ -19,7 +21,7 @@
     <string name="create_event">Create Event</string>
     <string name="logout">Log Out</string>
     <string name="account">Account</string>
-
+    <string name="event_detail">Event Detail</string>
 
 
     <string name="name">Name</string>
@@ -39,6 +41,7 @@
     <string name="blank_singer">John Mayer</string>
     <string name="blank_song">Slow Dancing in A Burning Room</string>
     <string name="blank_album">The Album of John Mayer</string>
+    <string name="blank_date">11:00 12 April 2019</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

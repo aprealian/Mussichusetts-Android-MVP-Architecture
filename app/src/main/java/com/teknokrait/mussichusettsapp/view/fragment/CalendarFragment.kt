@@ -1,6 +1,7 @@
 package com.teknokrait.mussichusettsapp.view.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
@@ -20,6 +21,8 @@ import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.teknokrait.mussichusettsapp.R
 import com.teknokrait.mussichusettsapp.local.RealmManager
+import com.teknokrait.mussichusettsapp.util.Constants
+import com.teknokrait.mussichusettsapp.view.activity.EventDetailActivity
 import com.teknokrait.mussichusettsapp.view.adapter.DayViewContainer
 import com.teknokrait.mussichusettsapp.view.adapter.MonthViewContainer
 import com.teknokrait.mussichusettsapp.view.base.BaseFragment
@@ -74,6 +77,16 @@ class CalendarFragment : BaseFragment() {
                 container.textView.text = month.yearMonth.month.name
                 container.textView.setTextColor(ContextCompat.getColor(context!!, R.color.font2))
                 //container.textView.setTypeface(null, Typeface.BOLD);
+
+                // Setup each header day text if we have not done that already.
+//                if (container.legendLayout.tag == null) {
+//                    container.legendLayout.tag = month.yearMonth
+//                    container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
+//                        tv.text = daysOfWeek[index].name.first().toString()
+//                        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
+//                        //tv.setTextColorRes(R.color.example_6_black)
+//                    }
+//                }
             }
         }
 
@@ -87,16 +100,25 @@ class CalendarFragment : BaseFragment() {
                 //Check is event dates
                 val count = RealmManager.createEventDao()?.countEventByDate(selectedDate)
                 if(!(count == null || count <= 0)){
-                    Toast.makeText(context, count.toString(), Toast.LENGTH_LONG).show()
-                    container.textView.setTextColor(ContextCompat.getColor(context!!, R.color.white))
-                    container.textView.setBackground(ContextCompat.getDrawable(context!!, R.drawable.circle_orange))
+
+                    container.textView.setTextColor(ContextCompat.getColor(context!!, R.color.orange))
+                    container.textView.setBackground(ContextCompat.getDrawable(context!!, R.drawable.circle_grey))
+                    // send the selected date to event detail activity
+                    container.textView.setOnClickListener {
+                        val intent = Intent(activity, EventDetailActivity::class.java)
+                        intent.putExtra(Constants.TAG_DATE, selectedDate)
+                        startActivity(intent)
+                    }
+
                 } else if(DateUtils.isToday(selectedDate.time)){
                     //check is current date
-                    container.textView.setTextColor(ContextCompat.getColor(context!!, R.color.colorPrimary))
+                    container.textView.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+                    container.textView.setBackground(ContextCompat.getDrawable(context!!, R.drawable.circle_red))
                 } else if (day.owner == DayOwner.THIS_MONTH) {
-                    container.textView.setTextColor(ContextCompat.getColor(context!!, R.color.font3))
+                    container.textView.setTextColor(ContextCompat.getColor(context!!, R.color.font2))
                 } else {
                     container.textView.setTextColor(Color.GRAY)
+                    container.textView.setBackgroundColor(ContextCompat.getColor(context!!, R.color.white))
                 }
             }
         }

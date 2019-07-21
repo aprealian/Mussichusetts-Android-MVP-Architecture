@@ -7,6 +7,7 @@ package com.teknokrait.mussichusettsapp.util
 class Constants {
     companion object {
         val TAG_WISH_LIST = "onwishlist"
+        val TAG_DATE = "date"
     }
 }
 

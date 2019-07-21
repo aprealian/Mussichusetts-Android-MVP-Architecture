@@ -4,6 +4,7 @@ import androidx.annotation.NonNull
 import com.teknokrait.mussichusettsapp.model.Event
 import io.realm.Realm
 import io.realm.RealmResults
+import io.realm.Sort
 import timber.log.Timber
 import java.util.*
 
@@ -75,6 +76,26 @@ class EventDao(@param:NonNull private val mRealm: Realm) {
             .findAll().size
 
         //return mRealm.where(Event::class.java).equalTo(Event::eventDate.name,date).findAll().count()
+    }
+
+    fun loadEventsByDate(date: Date):  List<Event> {
+
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        val date1 = Date(calendar.timeInMillis)
+        calendar.add(Calendar.DAY_OF_YEAR, 1)
+        val date2 = Date(calendar.timeInMillis)
+
+        return mRealm.where(Event::class.java)
+            .greaterThanOrEqualTo(Event::eventDate.name, date1)
+            .lessThan(Event::eventDate.name, date2)
+            .sort(Event::eventDate.name, Sort.ASCENDING)
+            .findAll()
     }
 
     fun remove(eventId: Long) {
