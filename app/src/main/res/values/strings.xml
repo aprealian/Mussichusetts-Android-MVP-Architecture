@@ -17,6 +17,7 @@
     <string name="find">Find</string>
     <string name="wishlist">Wishlist</string>
     <string name="calendar">Calendar</string>
+    <string name="pick_the_date">Pick The Date</string>
     <string name="create">Create</string>
     <string name="create_event">Create Event</string>
     <string name="logout">Log Out</string>

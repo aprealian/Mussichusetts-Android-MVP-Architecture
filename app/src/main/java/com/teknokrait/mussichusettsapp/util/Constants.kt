@@ -8,6 +8,9 @@ class Constants {
     companion object {
         val TAG_WISH_LIST = "onwishlist"
         val TAG_DATE = "date"
+        val TAG_SELECTED_DATE = "selected_date"
+
+        val CODE_DATE = 101
     }
 }
 

@@ -46,7 +46,7 @@ class CalendarFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCalendarEvent()
-        initLoadEvent()
+        //initLoadEvent()
     }
 
     private fun initLoadEvent() {
@@ -77,16 +77,6 @@ class CalendarFragment : BaseFragment() {
                 container.textView.text = month.yearMonth.month.name
                 container.textView.setTextColor(ContextCompat.getColor(context!!, R.color.font2))
                 //container.textView.setTypeface(null, Typeface.BOLD);
-
-                // Setup each header day text if we have not done that already.
-//                if (container.legendLayout.tag == null) {
-//                    container.legendLayout.tag = month.yearMonth
-//                    container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
-//                        tv.text = daysOfWeek[index].name.first().toString()
-//                        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
-//                        //tv.setTextColorRes(R.color.example_6_black)
-//                    }
-//                }
             }
         }
 

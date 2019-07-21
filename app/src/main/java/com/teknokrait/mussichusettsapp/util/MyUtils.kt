@@ -18,6 +18,16 @@ import java.util.*
 import android.net.ConnectivityManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
+import android.view.Display
+import android.R.attr.y
+import android.R.attr.x
+import android.app.Activity
+import android.graphics.Point
+import android.view.WindowManager
+
+
 
 /**
  * Created by Aprilian Nur Wakhid Daini on 7/19/2019.
@@ -97,4 +107,28 @@ fun isNetworkConnected(context: Context): Boolean {
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager //1
     val networkInfo = connectivityManager.activeNetworkInfo //2
     return networkInfo != null && networkInfo.isConnected //3
+}
+
+
+fun getScreenDimension(activity: Activity) : IntArray{
+
+    val result = IntArray(2)
+    var Measuredwidth = 0
+    var Measuredheight = 0
+    val size = Point()
+    val w = activity.getWindowManager()
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        w.getDefaultDisplay().getSize(size)
+        Measuredwidth = size.x
+        Measuredheight = size.y
+    } else {
+        val d = w.getDefaultDisplay()
+        Measuredwidth = d.getWidth()
+        Measuredheight = d.getHeight()
+    }
+
+    result[0] = Measuredwidth
+    result[1] = Measuredheight
+    return result
 }

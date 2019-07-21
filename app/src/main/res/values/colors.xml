@@ -8,6 +8,8 @@
     <color name="font2">#4A4A4A</color>
     <color name="font3">#737373</color>
 
+    <color name="windows_background">#57323232</color>
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="orange">#F7A324</color>
