@@ -64,7 +64,7 @@ class TimePickerFragment : Fragment() {
         timePicker.setOnTimeChangedListener(TimePicker.OnTimeChangedListener { _, selectedHour, selectedMinute ->
             // your logic
             localTime = LocalTime.of(selectedHour, selectedMinute)
-            Toast.makeText(context, "Test : " + selectedHour.toString(), Toast.LENGTH_LONG).show()
+            //Toast.makeText(context, "Test : " + selectedHour.toString(), Toast.LENGTH_LONG).show()
         })
 
         tvSaveDateTime.setOnClickListener {

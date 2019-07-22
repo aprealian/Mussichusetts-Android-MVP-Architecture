@@ -98,6 +98,28 @@ class EventDao(@param:NonNull private val mRealm: Realm) {
             .findAll()
     }
 
+
+    fun loadEventAlarmNewest():  Event? {
+        val calendar = Calendar.getInstance()
+        val date1 = Date(calendar.timeInMillis)
+
+        return mRealm.where(Event::class.java)
+            .greaterThanOrEqualTo(Event::eventDate.name, date1)
+            .sort(Event::eventDate.name, Sort.ASCENDING)
+            .findFirst()
+    }
+
+    fun loadEventAlarm30MinuteBefore(event: Event):  Event? {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.MINUTE, 30);
+        val date1 = Date(calendar.timeInMillis)
+
+        return mRealm.where(Event::class.java)
+            .greaterThanOrEqualTo(Event::eventDate.name, date1)
+            .sort(Event::eventDate.name, Sort.ASCENDING)
+            .findFirst()
+    }
+
     fun remove(eventId: Long) {
         // check result
         val results = mRealm.where(Event::class.java)

@@ -21,12 +21,15 @@ import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.teknokrait.mussichusettsapp.R
 import com.teknokrait.mussichusettsapp.local.RealmManager
+import com.teknokrait.mussichusettsapp.model.MessageEvent
 import com.teknokrait.mussichusettsapp.util.Constants
 import com.teknokrait.mussichusettsapp.view.activity.EventDetailActivity
 import com.teknokrait.mussichusettsapp.view.adapter.DayViewContainer
 import com.teknokrait.mussichusettsapp.view.adapter.MonthViewContainer
 import com.teknokrait.mussichusettsapp.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_calendar.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.temporal.WeekFields
@@ -117,4 +120,8 @@ class CalendarFragment : BaseFragment() {
         calendarView.smoothScrollToDate(LocalDate.now(), DayOwner.THIS_MONTH)
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: MessageEvent) {
+        if(event.tag.equals(Constants.TAG_CALENDAR))calendarView.adapter?.notifyDataSetChanged()
+    }
 }
