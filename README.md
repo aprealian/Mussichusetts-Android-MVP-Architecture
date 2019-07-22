@@ -6,8 +6,7 @@ If you wanted to try to install the <b>Mussichusetts App</b>, here is the APK li
 
 
 <b>What should you do to run this project :</b><br/>
-1. This app uses Google API to get the user account and Musixmatch API to get the track or song data. So, please replace the booth API Key in Gradle with your API Key.<br/>
-2.Because this project using AndroiX, you must update your SDK and set the compile SDK to Android 9.0 (API level 28).<br/>
+1. This app uses Google API to get the user account and Musixmatch API to get the track or song data. So, please replace the booth API Key in Gradle with your API Key.<br/>2.Because this project using AndroiX, you must update your SDK and set the compile SDK to Android 9.0 (API level 28).<br/>
 
 <br/><br/>
 <b>Features:</b>
