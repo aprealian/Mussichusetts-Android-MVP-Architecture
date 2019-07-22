@@ -4,9 +4,9 @@ This app implements MVP architecture using Kotlin, Retrofit, RxJava, RxAndroid, 
 If you interested and wanted to try the MusixMatch API, here is the link : https://developer.musixmatch.com/documentation<br/>
 
 
-<img src="https://drive.google.com/open?id=1sde4EuU-rgbt8nOwb1DOb9QBlkvAq3p_" alt="Login Page"/>
+<img src="https://photos.google.com/share/AF1QipPjhN0IiacEoCgqeoF47iKTvvN0KIUBqLAUmjzpapBqmGFIF2IhOE1qnYREvyoIDQ/photo/AF1QipM8tyUskWCEnrdah-gEBqCKN_h7hS04JICsIo5A?key=YzZESVdLOHFoeUlOMzAtemg3R09tLVFpZXNMdmJ3" alt="Login Page"/>
 
-[logo]: https://drive.google.com/open?id=1sde4EuU-rgbt8nOwb1DOb9QBlkvAq3p_ "Login Page"
+[logo]: https://photos.google.com/share/AF1QipPjhN0IiacEoCgqeoF47iKTvvN0KIUBqLAUmjzpapBqmGFIF2IhOE1qnYREvyoIDQ/photo/AF1QipM8tyUskWCEnrdah-gEBqCKN_h7hS04JICsIo5A?key=YzZESVdLOHFoeUlOMzAtemg3R09tLVFpZXNMdmJ3 "Login Page"
 
 <br/><br/>
 
