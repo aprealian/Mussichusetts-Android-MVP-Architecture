@@ -29,9 +29,9 @@
                 android:textSize="16sp"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimary"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_button"
+                android:background="@drawable/bg_button_white"
                 android:paddingTop="@dimen/padding"
                 android:paddingBottom="@dimen/padding"
                 android:paddingLeft="@dimen/padding_quart"
@@ -49,6 +49,17 @@
         android:layout_width="match_parent"
         android:layout_height="0.2dp"/>
 
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/white"/>
+
     <TextView
         android:text="@string/name"
         android:textSize="14sp"
@@ -58,6 +69,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/tvName"
         android:text="@string/name_example"
         android:textSize="18sp"
         android:textColor="@color/font2"
@@ -75,6 +87,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/tvEmail"
         android:text="@string/email_axample"
         android:textSize="18sp"
         android:textColor="@color/font2"
@@ -84,7 +97,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:text="@string/gender"
+        android:text="@string/account_type"
         android:textSize="14sp"
         android:textColor="@color/font3"
         android:layout_marginTop="@dimen/padding_double"
@@ -92,7 +105,8 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:text="@string/gender_example"
+        android:id="@+id/tvAccountType"
+        android:text="@string/socmed_example"
         android:textSize="18sp"
         android:textColor="@color/font2"
         android:textStyle="bold"

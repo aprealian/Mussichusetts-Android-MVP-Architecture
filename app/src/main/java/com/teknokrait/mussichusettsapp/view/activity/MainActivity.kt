@@ -37,45 +37,45 @@ class MainActivity : BaseActivity(), LifecycleOwner {
         val models =  arrayListOf<NavigationTabBar.Model>()
         models.add(
                 NavigationTabBar.Model.Builder(
-                        ContextCompat.getDrawable(this, R.drawable.ic_action_home_unactive),
+                        ContextCompat.getDrawable(this, R.drawable.ic_tab_search),
                         Color.parseColor(colors[0])
-                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_home_active))
+                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_tab_search))
                         .title(titles[0])
                         .badgeTitle(titles[0])
                         .build()
         )
         models.add(
                 NavigationTabBar.Model.Builder(
-                        ContextCompat.getDrawable(this, R.drawable.ic_action_bookmark_unactive),
+                        ContextCompat.getDrawable(this, R.drawable.ic_tab_wishlist),
                         Color.parseColor(colors[1])
-                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_bookmark_active))
+                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_tab_wishlist))
                         .title(titles[1])
                         .badgeTitle(titles[1])
                         .build()
         )
         models.add(
                 NavigationTabBar.Model.Builder(
-                        ContextCompat.getDrawable(this, R.drawable.ic_action_menu_unactive),
+                        ContextCompat.getDrawable(this, R.drawable.ic_tab_calendar),
                         Color.parseColor(colors[2])
-                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_menu_active))
+                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_tab_calendar))
                         .title(titles[2])
                         .badgeTitle(titles[2])
                         .build()
         )
         models.add(
                 NavigationTabBar.Model.Builder(
-                        ContextCompat.getDrawable(this, R.drawable.ic_action_info_unactive),
+                        ContextCompat.getDrawable(this, R.drawable.ic_tab_add_calendar),
                         Color.parseColor(colors[3])
-                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_info_active))
+                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_tab_add_calendar))
                         .title(titles[3])
                         .badgeTitle(titles[3])
                         .build()
         )
         models.add(
                 NavigationTabBar.Model.Builder(
-                        ContextCompat.getDrawable(this, R.drawable.ic_action_info_unactive),
+                        ContextCompat.getDrawable(this, R.drawable.ic_tab_account),
                         Color.parseColor(colors[3])
-                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_info_active))
+                ).selectedIcon(ContextCompat.getDrawable(this, R.drawable.ic_tab_account))
                         .title(titles[3])
                         .badgeTitle(titles[3])
                         .build()

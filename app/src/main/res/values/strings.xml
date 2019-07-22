@@ -33,6 +33,8 @@
     <string name="name_example">Aprilian Nur</string>
     <string name="email_axample">aprilian@gmail.com</string>
     <string name="gender_example">Male</string>
+    <string name="socmed_example">Google</string>
+    <string name="account_type">Account Type</string>
 
 
     <string name="event_date">Event Date</string>
