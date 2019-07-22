@@ -39,9 +39,9 @@ class DatetTimePickerActivity : AppCompatActivity(), DatePickerFragment.OnFragme
         this.selectedDate = localDate
         getSupportFragmentManager()
             .beginTransaction()
-            .add(R.id.frame_container, TimePickerFragment(), "time_picker")
+            .add(R.id.frame_container, TimePickerFragment.newInstance(localDate), "time_picker")
             .addToBackStack("time_picker")
-            .commit();
+            .commit()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

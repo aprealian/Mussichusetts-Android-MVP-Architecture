@@ -18,6 +18,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.widget.CalendarView
 import android.widget.Toast
+import com.teknokrait.mussichusettsapp.view.activity.DatetTimePickerActivity
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.LocalTime
 import java.text.SimpleDateFormat
@@ -27,6 +28,7 @@ private const val ARG_PARAM1 = "param1"
 
 class TimePickerFragment : Fragment() {
 
+    private var localDate: LocalDate? = null
     private var localTime: LocalTime? = null
     private var param1: String? = null
     private var listener: OnFragmentInteractionListener? = null
@@ -35,6 +37,7 @@ class TimePickerFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
+            localDate = LocalDate.parse(param1)
         }
     }
 
@@ -68,7 +71,13 @@ class TimePickerFragment : Fragment() {
         })
 
         tvSaveDateTime.setOnClickListener {
-            if (localTime != null) {
+
+            val localDateTimeSelected = LocalDateTime.of(localDate,localTime)
+            val localDateTimeNow = LocalDateTime.now()
+
+            if (localDateTimeSelected < localDateTimeNow){
+                Toast.makeText(context, "Sorry, the time cannot be lower than now", Toast.LENGTH_LONG).show()
+            } else if (localTime != null) {
                 listener?.onTimePicker(localTime!!)
             } else {
                 Toast.makeText(context, "Please, pick the time", Toast.LENGTH_LONG).show()
@@ -98,10 +107,10 @@ class TimePickerFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(localDate: LocalDate) =
             TimePickerFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM1, localDate.toString())
                 }
             }
     }

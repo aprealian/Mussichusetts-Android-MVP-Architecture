@@ -21,4 +21,14 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+
+    <!--<style name="MyTimePickerDialogStyle" parent="@style/ThemeOverlay.AppCompat.Dialog.Alert">-->
+        <!--<item name="showTitle">false</item>-->
+        <!--<item name="colorControlActivated">#48EC4359</item>-->
+        <!--<item name="colorAccent">@color/colorPrimary</item>-->
+        <!--<item name="android:textColorPrimary">#43a047</item>-->
+        <!--<item name="android:textColorSecondary">#f44336</item>-->
+    <!--</style>-->
+
+
 </resources>

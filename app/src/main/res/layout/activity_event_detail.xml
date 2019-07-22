@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"/>
         <TextView
                 android:layout_toRightOf="@+id/ivBack"
-                android:text="@string/event_detail"
+                android:text="@string/list_events"
                 android:textSize="24sp"
                 android:textColor="@color/font2"
                 android:textStyle="bold"

@@ -10,6 +10,7 @@ import com.teknokrait.mussichusettsapp.R
 import com.teknokrait.mussichusettsapp.local.RealmManager
 import com.teknokrait.mussichusettsapp.model.Event
 import com.teknokrait.mussichusettsapp.view.base.BaseFragment
+import com.teknokrait.mussichusettsapp.util.closeKeyboard
 import kotlinx.android.synthetic.main.fragment_create.*
 import java.util.*
 import android.app.Activity
@@ -27,17 +28,26 @@ import com.teknokrait.mussichusettsapp.view.activity.AlarmActivity
 import com.google.gson.Gson
 import com.teknokrait.mussichusettsapp.model.MessageEvent
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import timber.log.Timber
 
 
 class CreateFragment : BaseFragment() {
 
     //private var selectedDate:Date? = null
     private var selectedDate:Date? = null
+    private var selectedAlarmDate:Date? = null
     private var selectedDateTime:org.threeten.bp.LocalDateTime? = null
     private var isClickDateEnable:Boolean = true
 
     override fun getFragmentLayout(): Int {
         return R.layout.fragment_create
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isEventBusNeeded = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,6 +74,8 @@ class CreateFragment : BaseFragment() {
                 //createAlarmReceiver()
                 //val eventAlarm = RealmManager.createEventDao()?.loadEventAlarm30MinuteBefore()
                 //RealmManager.close()
+                closeKeyboard(this.context!!,etEventDate)
+                closeKeyboard(this.context!!,etEventName)
                 createAlarmReceiver(event)
                 EventBus.getDefault().post(MessageEvent(Constants.TAG_CALENDAR, event))
             }
@@ -119,10 +131,13 @@ class CreateFragment : BaseFragment() {
                                 selectedDateTime!!.minute)
 
                             calendar.add(Calendar.MONTH, -1)
-
                             selectedDate = calendar.time
                             val formatter = SimpleDateFormat("hh:mm a, dd-MMM-yyyy")
                             etEventDate.setText(formatter.format(selectedDate))
+
+
+                            calendar.add(Calendar.MINUTE, -30)
+                            selectedAlarmDate = calendar.time
                         }
 
                     }
@@ -187,11 +202,27 @@ class CreateFragment : BaseFragment() {
                 selectedDateTime!!.hour,
                 selectedDateTime!!.minute)
             calendar.add(Calendar.MINUTE, -30)
+            //harus minus satu bulan
+            calendar.add(Calendar.MONTH, -1)
+
+//            Timber.e("cek calendar millis 1 : "+calendar.timeInMillis)
+//            Timber.e("cek calendar millis 2 : "+selectedAlarmDate?.time)
+//            Timber.e("cek calendar millis 3 : "+selectedDate?.time)
+//            Timber.e("cek calendar millis current : "+System.currentTimeMillis())
 
             //alarmManager!!.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10 * 1000, pendingIntent)
             //alarmManager!!.set(AlarmManager.RTC_WAKEUP, event.eventDate.time - 1800000, pendingIntent)
-            alarmManager!!.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, 1563789382681, pendingIntent)
+            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, selectedAlarmDate?.time!!, pendingIntent)
+            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, alarm, pendingIntent)
+            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, selectedDate?.time!!+1*1, pendingIntent)
+            alarmManager!!.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis +1*1, pendingIntent)
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: MessageEvent) {
     }
 
 }

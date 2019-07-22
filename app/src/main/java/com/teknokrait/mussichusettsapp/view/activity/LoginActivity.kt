@@ -125,6 +125,6 @@ class LoginActivity : AppCompatActivity() {
         val newIntent = Intent(this@LoginActivity, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(newIntent)
-        //finish()
+        finish()
     }
 }

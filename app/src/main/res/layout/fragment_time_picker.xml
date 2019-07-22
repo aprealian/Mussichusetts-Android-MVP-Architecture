@@ -37,9 +37,11 @@
                 android:layout_height="match_parent">
 
 
-
             <TimePicker
                     android:id="@+id/timePicker"
+                    android:background="@color/white"
+                    android:headerBackground="@color/colorPrimary"
+                    android:numbersSelectorColor="#48EC4359"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
             </TimePicker>

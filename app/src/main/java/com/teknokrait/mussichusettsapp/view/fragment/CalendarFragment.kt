@@ -46,6 +46,11 @@ class CalendarFragment : BaseFragment() {
         return R.layout.fragment_calendar
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isEventBusNeeded = true
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCalendarEvent()
@@ -122,6 +127,10 @@ class CalendarFragment : BaseFragment() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: MessageEvent) {
-        if(event.tag.equals(Constants.TAG_CALENDAR))calendarView.adapter?.notifyDataSetChanged()
+        if(event.tag.equals(Constants.TAG_CALENDAR)){
+            //calendarView.adapter?.notifyDataSetChanged()
+            //Toast.makeText(context, "Calendar updated ", Toast.LENGTH_LONG).show()
+            initCalendarEvent()
+        }
     }
 }
