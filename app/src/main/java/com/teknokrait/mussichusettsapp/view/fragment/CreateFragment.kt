@@ -1,36 +1,34 @@
 package com.teknokrait.mussichusettsapp.view.fragment
 
+import android.app.Activity
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_CANCEL_CURRENT
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-
+import com.google.gson.Gson
 import com.teknokrait.mussichusettsapp.R
-import com.teknokrait.mussichusettsapp.local.RealmManager
-import com.teknokrait.mussichusettsapp.model.Event
-import com.teknokrait.mussichusettsapp.view.base.BaseFragment
-import com.teknokrait.mussichusettsapp.util.closeKeyboard
-import kotlinx.android.synthetic.main.fragment_create.*
-import java.util.*
-import android.app.Activity
-import com.teknokrait.mussichusettsapp.util.Constants
-import com.teknokrait.mussichusettsapp.view.activity.DatetTimePickerActivity
-import java.text.SimpleDateFormat
-import android.app.AlarmManager
-import android.app.PendingIntent.FLAG_CANCEL_CURRENT
-import android.app.PendingIntent
 import com.teknokrait.mussichusettsapp.alarm.AlarmBroadCastReceiver
 import com.teknokrait.mussichusettsapp.alarm.AlarmService
-import android.os.Build
-import android.os.Build.VERSION.SDK_INT
-import com.teknokrait.mussichusettsapp.view.activity.AlarmActivity
-import com.google.gson.Gson
+import com.teknokrait.mussichusettsapp.local.RealmManager
+import com.teknokrait.mussichusettsapp.model.Event
 import com.teknokrait.mussichusettsapp.model.MessageEvent
+import com.teknokrait.mussichusettsapp.util.Constants
+import com.teknokrait.mussichusettsapp.util.closeKeyboard
+import com.teknokrait.mussichusettsapp.view.activity.AlarmActivity
+import com.teknokrait.mussichusettsapp.view.activity.DatetTimePickerActivity
+import com.teknokrait.mussichusettsapp.view.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_create.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class CreateFragment : BaseFragment() {
@@ -69,11 +67,6 @@ class CreateFragment : BaseFragment() {
                 Toast.makeText(context, "Create Event Success", Toast.LENGTH_LONG).show()
                 etEventDate.setText("")
                 etEventName.setText("")
-                //createAlarmActivity()
-                //createAlarmService()
-                //createAlarmReceiver()
-                //val eventAlarm = RealmManager.createEventDao()?.loadEventAlarm30MinuteBefore()
-                //RealmManager.close()
                 closeKeyboard(this.context!!,etEventDate)
                 closeKeyboard(this.context!!,etEventName)
                 createAlarmReceiver(event)
@@ -82,6 +75,22 @@ class CreateFragment : BaseFragment() {
         }
 
         llChooseCalendar.setOnClickListener {
+            if (isClickDateEnable){
+                //todo: create calendar picker
+                //val calendarFragment = CustomDialogFragment()
+                //calendarFragment.show(childFragmentManager,"Calendar Picker")
+                isClickDateEnable = false
+                //val i = Intent(activity, CalendarPickerActivity::class.java)
+                val i = Intent(activity, DatetTimePickerActivity::class.java)
+                if(selectedDate != null){
+                    //i.putExtra(Constants.TAG_SELECTED_DATE, selectedDate.toString())
+                    i.putExtra(Constants.TAG_SELECTED_DATE, selectedDateTime.toString())
+                }
+                startActivityForResult(i, Constants.CODE_DATE)
+            }
+        }
+
+        ivChooseCalendar.setOnClickListener {
             if (isClickDateEnable){
                 //todo: create calendar picker
                 //val calendarFragment = CustomDialogFragment()
@@ -113,14 +122,9 @@ class CreateFragment : BaseFragment() {
                 if (data != null) {
                     if (resultCode == Activity.RESULT_OK && data.hasExtra(Constants.TAG_SELECTED_DATE) && data.getStringExtra(Constants.TAG_SELECTED_DATE) != null) {
                         val strDateTime = data.getStringExtra(Constants.TAG_SELECTED_DATE)
-                        //selectedDate = java.sql.Date.valueOf(newDate)
                         selectedDateTime = org.threeten.bp.LocalDateTime.parse(strDateTime)
-                        //selectedDate = java.sql.Date.valueOf(selectedDateTime.toString())
 
-//                        selectedDate = Date()
-//                        selectedDate?.time = selectedDateTime?.toEpochSecond(OffsetDateTime.now().getOffset())!!
-//                        //selectedDate?.time = selectedDateTime.
-//
+
                         if (selectedDateTime != null){
                             val calendar = Calendar.getInstance()
                             calendar.set(
@@ -205,18 +209,6 @@ class CreateFragment : BaseFragment() {
             //harus minus satu bulan
             calendar.add(Calendar.MONTH, -1)
 
-//            Timber.e("cek calendar millis 1 : "+calendar.timeInMillis)
-//            Timber.e("cek calendar millis 2 : "+selectedAlarmDate?.time)
-//            Timber.e("cek calendar millis 3 : "+selectedDate?.time)
-//            Timber.e("cek calendar millis current : "+System.currentTimeMillis())
-
-            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10 * 1000, pendingIntent)
-            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, event.eventDate.time - 1800000, pendingIntent)
-            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, 1563789382681, pendingIntent)
-            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, selectedAlarmDate?.time!!, pendingIntent)
-            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, alarm, pendingIntent)
-            //alarmManager!!.set(AlarmManager.RTC_WAKEUP, selectedDate?.time!!+1*1, pendingIntent)
             alarmManager!!.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis +1*1, pendingIntent)
         }
     }

@@ -37,10 +37,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         buildTypes.each {
-            it.buildConfigField 'String', 'MUSIXMATCH_API_KEY', "\"YOUR_API_KEY\""
-            it.resValue 'string', 'MUSIXMATCH_API_KEY', "\"YOUR_API_KEY\""
-            it.buildConfigField 'String', 'DEFAULT_GOOGLE_WEB_CLIENT_ID', "\"YOUR_API_KEY\""
-            it.resValue 'string', 'DEFAULT_GOOGLE_WEB_CLIENT_ID', "\"YOUR_API_KEY\""
+            it.buildConfigField 'String', 'MUSIXMATCH_API_KEY', "\"e24c53694c98a49793f4c7fe42badf97\""
+            it.resValue 'string', 'MUSIXMATCH_API_KEY', "\"e24c53694c98a49793f4c7fe42badf97\""
+            it.buildConfigField 'String', 'DEFAULT_GOOGLE_WEB_CLIENT_ID', "\"869295123854-r7253q7b1cvls57c8t9o84v35juu5arh.apps.googleusercontent.com\""
+            it.resValue 'string', 'DEFAULT_GOOGLE_WEB_CLIENT_ID', "\"869295123854-r7253q7b1cvls57c8t9o84v35juu5arh.apps.googleusercontent.com\""
         }
     }
 }
@@ -57,9 +57,15 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation "androidx.constraintlayout:constraintlayout:$project.constraintlayout"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.12'
+    //Add Unit Test and UI Test
+    //androidTestImplementation 'androidx.test:runner:1.2.0'
+    //testImplementation 'junit:junit:4.12'
+    testImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
 
 
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'

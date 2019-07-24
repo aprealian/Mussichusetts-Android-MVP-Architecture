@@ -1,0 +1,30 @@
+package com.teknokrait.mussichusettsapp
+
+import android.view.View
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import org.hamcrest.Matcher
+
+/**
+ * Created by Aprilian Nur Wakhid Daini on 7/24/2019.
+ */
+object MyViewAction {
+
+    fun clickChildViewWithId(id: Int): ViewAction {
+        return object : ViewAction {
+            override fun getConstraints(): Matcher<View>? {
+                return null
+            }
+
+            override fun getDescription(): String {
+                return "Click on a child view with specified id."
+            }
+
+            override fun perform(uiController: UiController, view: View) {
+                val v = view.findViewById<View>(id)
+                v.performClick()
+            }
+        }
+    }
+
+}

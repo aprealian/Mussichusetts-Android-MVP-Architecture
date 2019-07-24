@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content" />
 
         <ImageView
+                android:id="@+id/ivChooseCalendar"
                 android:src="@drawable/ic_calendar"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/padding"
