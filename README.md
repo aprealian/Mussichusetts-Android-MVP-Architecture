@@ -5,6 +5,21 @@ If you interested and wanted to try the MusixMatch API, here is the link : https
 If you wanted to try to install the <b>Mussichusetts App</b>, here is the APK link : https://drive.google.com/open?id=1j5ssedOTJwSMyO3S3Y5zNYnsXG9czS4p<br/>
 
 
+<b>What should you do to run this project :</b><br/>
+1. This app uses Google API to get the user account and Musixmatch API to get the track or song data. So, please replace the booth API Key in Gradle with your API Key.<br/>2.Because this project using AndroiX, you must update your SDK and set the compile SDK to Android 9.0 (API level 28).<br/>
+
+<br/><br/>
+<b>Features:</b>
+- Search track by artist
+- Add track to wishlist
+- Calendar events
+- Add events to the calendar
+- Custom DateTime picker (date cannot be lower than now)
+- Alarm notification for the event (30 minutes before)
+- Google data account
+
+</br></br></br>
+
 <img src="https://lh3.googleusercontent.com/7RbkFFFKEmPu_cDsEBvO8BWf50PshTSlr-Yd1NGJg8qXy4Y9JHMMZCKeo-wwVrLK0Y1o2svdh6ZhiRLmXW0YPvJv_IMGQh-lv8LS5qSxDQAJJpj__3FkE_p6wjcwMTV13nSjhYN5yA=w393-h697-no" alt="Login Page"/>
 
 <img src="https://lh3.googleusercontent.com/r8yXKJQalCItXk4jtWfRvk160z2IeyH1gb_TBLfd5MLOmwbYXU8wZMjBU1TAbno3YV_DpGg7LaYjxho0ozNRyo3ntDfhbq7fLftpQjDr_bnUYZ2FWpZQFjbQKCJl78BsvYHyJAfhpA=w387-h687-no" alt=""/>
